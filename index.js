@@ -22,13 +22,6 @@ const createWindow = () => {
   // and load the home page of the app.
   mainWindow.loadURL('https://onehack.us');
 
-/*
-  mainWindow.once("ready-to-show",()=>{
-    mainWindow.maximize();
-    mainWindow.show();
-    mainWindow.webContents.send('PageChanged',"Page has changed");
-  });
-  */
   //when ready maximize and show. This reduces flashing
   
   ipcMain.on('App-Loaded', ()=>{

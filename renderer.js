@@ -10,16 +10,7 @@ document.onreadystatechange = (event) => {
        ipcRenderer.send('App-Loaded',"Im ready");
     }
 };
-/*
-ipcRenderer.on('PageChanged', () => {
-    handleWindowControls();
-    console.log("Page Has Changed");
-});
-*/
-//document.addEventListener('DOMContentLoaded', (event) => {
-//    handleWindowControls();
-//    ipcRenderer.send('App-Loaded',"Im ready");
-//});
+
 window.onscroll = function() {handleWindowControls()};
 window.onbeforeunload = (event) => {
     /* If window is reloaded, remove win event listeners
@@ -29,7 +20,6 @@ window.onbeforeunload = (event) => {
 }
 
 function handleWindowControls() {
-    
     var oldMinimizeButton = document.getElementById("minimize-button");
     var oldCloseButton = document.getElementById("close-button");
     if (!oldMinimizeButton || !oldCloseButton){
