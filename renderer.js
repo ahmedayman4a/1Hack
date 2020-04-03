@@ -46,7 +46,7 @@ function handleWindowControls() {
         var closeLi = document.createElement("li");
         var closeButton = document.createElement("div");
         closeButton.id = "close-button";
-        closeButton.setAttribute("style", "grid-column: 1;grid-row: 1 / span 1;display: flex;justify-content: center;align-items: center;width: 2.2857em;height: 2.2857em;padding: .2143em;");
+        closeButton.setAttribute("style", "margin-right:10px; grid-column: 1;grid-row: 1 / span 1;display: flex;justify-content: center;align-items: center;width: 2.2857em;height: 2.2857em;padding: .2143em;");
         closeLi.append(closeButton);
         var closeButtonImg = document.createElement("img");
         closeButtonImg.src = "https://gist.githack.com/ahmedayman4a/0b62b14c35a5fc9704bc108752e6664c/raw/560c941023cc6e63dc0e44fae41eaac08b587549/CloseButton.svg";
