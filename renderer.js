@@ -1,5 +1,6 @@
 const remote = require('electron').remote;
 const { ipcRenderer } = require('electron');
+const { shell } = require('electron');
 
 const win = remote.getCurrentWindow();
 
@@ -11,15 +12,17 @@ document.onreadystatechange = (event) => {
     }
 };
 
-window.onscroll = function() {handleWindowControls()};
+window.onscroll = function() {
+    handleWindowControls();
+};
 window.onbeforeunload = (event) => {
     /* If window is reloaded, remove win event listeners
     (DOM element listeners get auto garbage collected but not
     Electron win listeners as the win is not dereferenced unless closed) */
     win.removeAllListeners();
 }
-
 function handleWindowControls() {
+    
     var oldMinimizeButton = document.getElementById("minimize-button");
     var oldCloseButton = document.getElementById("close-button");
     if (!oldMinimizeButton || !oldCloseButton){

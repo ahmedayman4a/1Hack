@@ -13,9 +13,9 @@ const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     center:true,
-    resizable: false,
     show:false,
     frame:false,
+    maximizable: true,
     icon:path.join(__dirname,'img/icon.png'),
     backgroundColor: '#2e2c29',
     webPreferences: {
@@ -41,8 +41,7 @@ const createWindow = () => {
     }
   }
   
-  mainWindow.webContents.on('will-navigate', handleRedirect)
-  mainWindow.webContents.on('new-window', handleRedirect)
+  mainWindow.webContents.on('new-window', handleRedirect);
 };
 
 // This method will be called when Electron has finished
