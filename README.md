@@ -16,4 +16,4 @@ Go to the [releases section](https://github.com/ahmedayman4a/1Hack/releases) and
 ### What about MacOS?
 Unfortunately I don't have a MacOS system to publish this program for MacOS. If you have one and want to help me publish this app for MacOS email me ([ahmedayman4a77@gmail.com](mailto:ahmedayman4a77@gmail.com))
 ## Any question? issues? recommendations? feature you want added?
-Just create an [issue](https://github.com/ahmedayman4a/1Hack/issues/new/choose) and we will look into it as soon as we can.
+Just create an [issue](https://github.com/ahmedayman4a/1Hack/issues/new/choose) and I will look into it as soon as we can.
