@@ -1,5 +1,7 @@
 # 1Hack
 > Desktop Application for the popular forum onehack.us
+## What is onehack.us ?
+1Hack is forum where everyone can share knowledge with each other. There are alot of tutorials, guides and articles for free. Sometimes there are giveaways ,too :wink:
 ## What is this application then?
 It is a way of keeping you connected to the forum. All you have to do is click on the shortcut on your desktop and you get all the new guides , tutorials and tools we developed just for you.
 ## How to install?
