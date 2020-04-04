@@ -1,6 +1,6 @@
 const remote = require('electron').remote;
 const { ipcRenderer } = require('electron');
-const { shell } = require('electron');
+var Mousetrap = require('mousetrap');
 
 const win = remote.getCurrentWindow();
 
@@ -8,18 +8,27 @@ const win = remote.getCurrentWindow();
 document.onreadystatechange = (event) => {
     if (document.readyState == "complete") {
         handleWindowControls();
-       ipcRenderer.send('App-Loaded',"Im ready");
+        bindShortcuts();
+       ipcRenderer.send('app-loaded',"Im ready");
     }
 };
 
 window.onscroll = function() {
     handleWindowControls();
 };
+
 window.onbeforeunload = (event) => {
     /* If window is reloaded, remove win event listeners
     (DOM element listeners get auto garbage collected but not
     Electron win listeners as the win is not dereferenced unless closed) */
     win.removeAllListeners();
+}
+function bindShortcuts(){
+    Mousetrap.bind(['command+r', 'ctrl+r', 'f5'], () => {
+        win.reload();
+    
+        return false // prevents default behavior and stops event from bubbling
+    })
 }
 function handleWindowControls() {
     
