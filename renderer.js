@@ -17,12 +17,7 @@ window.onscroll = function() {
     handleWindowControls();
 };
 
-window.onbeforeunload = (event) => {
-    /* If window is reloaded, remove win event listeners
-    (DOM element listeners get auto garbage collected but not
-    Electron win listeners as the win is not dereferenced unless closed) */
-    win.removeAllListeners();
-}
+
 function bindShortcuts(){
     Mousetrap.bind(['command+r', 'ctrl+r', 'f5'], () => {
         win.reload();
@@ -70,7 +65,7 @@ function handleWindowControls() {
             closeButtonImg.src = "https://gistcdn.githack.com/ahmedayman4a/0b62b14c35a5fc9704bc108752e6664c/raw/560c941023cc6e63dc0e44fae41eaac08b587549/CloseButton.svg";
         };
         closeButtonImg.addEventListener("click", event => {
-            win.close();
+            win.hide();
         });
         return closeLi;
     }
