@@ -1,6 +1,6 @@
 {
   "name": "1hack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Together WE Learn!",
   "main": "index.js",
   "repository": {
@@ -29,7 +29,8 @@
   "dependencies": {
     "electron-context-menu": "^0.16.0",
     "electron-is-dev": "^1.1.0",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "mousetrap": "^1.6.5"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.50",

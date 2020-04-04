@@ -21,6 +21,12 @@ contextMenu({
 			click: () => {
 				mainWindow.webContents.goForward();
 			}
+    },
+    {
+			label: 'Refresh (F5)',
+			click: () => {
+				mainWindow.reload();
+			}
 		}
 	]
 });
@@ -88,21 +94,26 @@ if (!gotTheLock) {
 
     //when ready maximize and show. This reduces flashing
 
-    ipcMain.on('App-Loaded', () => {
+    ipcMain.on('app-loaded', () => {
       mainWindow.maximize();
       mainWindow.show();
     });
 
     //Open all links with target=_blank in the default browser
-    var handleRedirect = (e, url) => {
-      mainWindow.webContents.send('PageChanged', "Page has changed");
+
+    mainWindow.webContents.on('new-window', (e, url) => {
       if (url != mainWindow.webContents.getURL()) {
         e.preventDefault();
         require('electron').shell.openExternal(url);
       }
-    }
+    });
 
-    mainWindow.webContents.on('new-window', handleRedirect);
+    mainWindow.webContents.on('will-navigate', (e, url) => {
+      mainWindow.webContents.send('Page-Changed', "Page has changed");
+      if (url != mainWindow.webContents.getURL()) {
+        e.preventDefault();
+      }
+    });
 
     mainWindow.on('close', function (event) {
       if (!isQuiting) {
