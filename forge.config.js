@@ -36,6 +36,13 @@ module.exports = {
               productName:'1Hack'
             }
       }
+    },
+    {
+      name: '@electron-forge/maker-dmg',
+      config: {
+        icon: './img/icon.png',
+        name: '1Hack'
+      }
     }
   ],
   publishers: [

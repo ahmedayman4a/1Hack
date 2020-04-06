@@ -18,5 +18,8 @@ Unfortunately I don't have a MacOS system to publish this program for MacOS. If 
 ## How to enable push notifications?
 Open account settings >> Click on Notifications >> Under Live Notifications click on enable notifications. If you see [Disable Notifications] this means notifications are already enabled.
 ![1Hack Notifications Tutorial GIF](https://raw.githubusercontent.com/ahmedayman4a/1Hack/master/img/1HackNotificationsTutorial.gif)
+## How to open external links in default browser?
+Open account settings >> Click on Interface >> Under Other make sure [Open all external links in a new tab] is checked >> Click on [Save Changes]
+![1Hack Open In Default Browser Tutorial GIF](https://raw.githubusercontent.com/ahmedayman4a/1Hack/master/img/1HackDefaultBrowserTutorial.gif)
 ## Any question? issues? recommendations? feature you want added?
-Just create an [issue](https://github.com/ahmedayman4a/1Hack/issues/new/choose) and I will look into it as soon as we can.
+Just create an [issue](https://github.com/ahmedayman4a/1Hack/issues/new/choose) and I will look into it as soon as I can.
