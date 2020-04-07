@@ -13,7 +13,7 @@ Go to the [releases section](https://github.com/ahmedayman4a/1Hack/releases) and
 Go to the [releases section](https://github.com/ahmedayman4a/1Hack/releases) and download the latest .deb file.
 ### Redhat based distros (Fedora, CentOS, RHEL, etc.) and openSuSE distro
 Go to the [releases section](https://github.com/ahmedayman4a/1Hack/releases) and download the latest .rpm file.
-### MacOS x64 (Thanks to @AyuSharma)
+### MacOS x64 (Thanks to Ayush Sharma)
 Go to the [releases section](https://github.com/ahmedayman4a/1Hack/releases) and download the latest 1Hack-darwin-x64.zip file.
 ## How to enable push notifications?
 Open account settings >> Click on Notifications >> Under Live Notifications click on enable notifications. If you see [Disable Notifications] this means notifications are already enabled.
