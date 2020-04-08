@@ -27,70 +27,70 @@ function bindShortcuts(){
 }
 function handleWindowControls() {
     
-    var oldMinimizeButton = document.getElementById("minimize-button");
-    var oldCloseButton = document.getElementById("close-button");
-    if (!oldMinimizeButton || !oldCloseButton){
+    var oldBackDiv = document.getElementById("back-button");
+    var oldForwardDiv = document.getElementById("forward-button");
+    if (!oldBackDiv || !oldForwardDiv){
         var wrapper = document.querySelector("header .wrap");
         wrapper.setAttribute("style","margin: 0;width: 100%; max-width: unset;")
         var ulELement = wrapper.querySelector(".contents ul.icons");
-        if(!oldMinimizeButton){
-            //Creates li inside it minimize div inside it minimize image
-            var minimizeLi = createMinimizeButton();
-            ulELement.append(minimizeLi);
+        if(!oldBackDiv){
+            //Creates li inside it back div inside it back image
+            var backLi = createBackButton();
+            ulELement.append(backLi);
         }
 
-        if(!oldCloseButton){
-            var closeLi = createCloseButton();
-            ulELement.append(closeLi);
+        if(!oldForwardDiv){
+            var forwardLi = createForwardButton();
+            ulELement.append(forwardLi);
         }
     }
     
 
-    function createCloseButton() {
-        var closeLi = document.createElement("li");
-        var closeButton = document.createElement("div");
-        closeButton.id = "close-button";
-        closeButton.setAttribute("style", "margin-right:10px; grid-column: 1;grid-row: 1 / span 1;display: flex;justify-content: center;align-items: center;width: 2.2857em;height: 2.2857em;padding: .2143em;");
-        closeLi.append(closeButton);
-        var closeButtonImg = document.createElement("img");
-        closeButtonImg.src = "https://gist.githack.com/ahmedayman4a/0b62b14c35a5fc9704bc108752e6664c/raw/560c941023cc6e63dc0e44fae41eaac08b587549/CloseButton.svg";
-        closeButtonImg.style.width = "20px";
-        closeButtonImg.style.height = "2.4em";
-        closeButtonImg.id = "close-button-img";
-        closeButton.append(closeButtonImg);
-        closeButtonImg.onmouseover = function () {
-            closeButtonImg.src = "https://gistcdn.githack.com/ahmedayman4a/e9f65e8d50567f0b17d45e088ca1aa5f/raw/40c89533a4b4ffacee7443653decde9e680f80c4/CloseButtonHover.svg";
+    function createForwardButton() {
+        var forwardLi = document.createElement("li");
+        var forwardDiv = document.createElement("div");
+        forwardDiv.id = "forward-button";
+        forwardDiv.setAttribute("style", "margin-right:10px; grid-column: 1;grid-row: 1 / span 1;display: flex;justify-content: center;align-items: center;width: 2.2857em;height: 2.2857em;padding: .2143em;");
+        forwardLi.append(forwardDiv);
+        var forwardImg = document.createElement("img");
+        forwardImg.src = "https://gistcdn.githack.com/ahmedayman4a/dc96efbee546ad1579d9b80d3470cf04/raw/8aab981aa8505ca389eb3746e69c7598e25b8d7d/Forward.svg";
+        forwardImg.style.width = "2.2857em";
+        forwardImg.style.height = "2.2857em";
+        forwardImg.id = "forward-button-img";
+        forwardDiv.append(forwardImg);
+        forwardImg.onmouseover = function () {
+            forwardImg.src = "https://gistcdn.githack.com/ahmedayman4a/56a1e7611248596525335532b1d1b8f8/raw/584d257915f5278c2318882ab7dcd121095663b9/ForwardOnHover.svg";
         };
-        closeButtonImg.onmouseout = function () {
-            closeButtonImg.src = "https://gistcdn.githack.com/ahmedayman4a/0b62b14c35a5fc9704bc108752e6664c/raw/560c941023cc6e63dc0e44fae41eaac08b587549/CloseButton.svg";
+        forwardImg.onmouseout = function () {
+            forwardImg.src = "https://gistcdn.githack.com/ahmedayman4a/dc96efbee546ad1579d9b80d3470cf04/raw/8aab981aa8505ca389eb3746e69c7598e25b8d7d/Forward.svg";
         };
-        closeButtonImg.addEventListener("click", event => {
-            win.hide();
+        forwardImg.addEventListener("click", event => {
+            win.webContents.goForward();
         });
-        return closeLi;
+        return forwardLi;
     }
 
-    function createMinimizeButton() {
-        var minimizeLi = document.createElement("li");
-        var minimizeButton = document.createElement("div");
-        minimizeButton.id = "minimize-button";
-        minimizeButton.setAttribute("style", "grid-column: 2;grid-row: 1 / span 1;display: flex;justify-content: center;align-items: center; width: 2.2857em;height: 2.2857em;padding: .2143em;");
-        minimizeLi.append(minimizeButton);
-        var minimizeButtonImg = document.createElement("img");
-        minimizeButtonImg.src = "https://gistcdn.githack.com/ahmedayman4a/074be8247cd40c0de52ec6220a8603dd/raw/1d0827511c1ff0fb8476d4e16c3cc37ef11ffd50/minimizeButton.svg";
-        minimizeButtonImg.style.width = "20px";
-        minimizeButtonImg.style.height = "20px";
-        minimizeButtonImg.id = "minimize-button-img";
-        minimizeButton.append(minimizeButtonImg);
-        minimizeButtonImg.onmouseover = function () {
-            minimizeButtonImg.src = "https://gistcdn.githack.com/ahmedayman4a/6da51cffdf4fd891819a20118b88fb0b/raw/17f3cf9dfd56daedc6c6ced87a0a73b4e9f9434d/minimizeButtonHover.svg";
+    function createBackButton() {
+        var backLi = document.createElement("li");
+        var backDiv = document.createElement("div");
+        backDiv.id = "back-button";
+        backDiv.setAttribute("style", "grid-column: 2;grid-row: 1 / span 1;display: flex;justify-content: center;align-items: center; width: 2.2857em;height: 2.2857em;padding: .2143em;");
+        backLi.append(backDiv);
+        var backImg = document.createElement("img");
+        backImg.src = "https://gistcdn.githack.com/ahmedayman4a/07f4bdb4637d9545396d4985daed696d/raw/c224cb85ca13af933111f82a5540f61d2bc3c0e9/Back.svg";
+        backImg.style.width = "2.2857em";
+        backImg.style.height = "2.2857em";
+        backImg.id = "back-button-img";
+        backDiv.append(backImg);
+        backImg.onmouseover = function () {
+            backImg.src = "https://gistcdn.githack.com/ahmedayman4a/06645a0ee356b9e6227fbb15cf5d3117/raw/47d6d206c78ae4b67697660bf642e38fa4db007c/BackOnHover.svg";
         };
-        minimizeButtonImg.onmouseout = function () {
-            minimizeButtonImg.src = "https://gistcdn.githack.com/ahmedayman4a/074be8247cd40c0de52ec6220a8603dd/raw/1d0827511c1ff0fb8476d4e16c3cc37ef11ffd50/minimizeButton.svg";
+        backImg.onmouseout = function () {
+            backImg.src = "https://gistcdn.githack.com/ahmedayman4a/07f4bdb4637d9545396d4985daed696d/raw/c224cb85ca13af933111f82a5540f61d2bc3c0e9/Back.svg";
         };
-        minimizeButtonImg.addEventListener("click", event => {
-            win.minimize();
+        backImg.addEventListener("click", event => {
+            win.webContents.goBack();
         });
-        return minimizeLi;
+        return backLi;
     }
 }

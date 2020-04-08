@@ -7,28 +7,28 @@ const {
 } = require('electron');
 const path = require('path');
 const contextMenu = require('electron-context-menu');
+var os = require('os');
 
 contextMenu({
-	prepend: (defaultActions, params, mainWindow) => [
-		{
-			label: 'Back',
-			click: () => {
-				mainWindow.webContents.goBack();
-			}
-		},
-		{
-			label: 'Forward',
-			click: () => {
-				mainWindow.webContents.goForward();
-			}
+  prepend: (defaultActions, params, mainWindow) => [{
+      label: 'Back',
+      click: () => {
+        mainWindow.webContents.goBack();
+      }
     },
     {
-			label: 'Refresh (F5)',
-			click: () => {
-				mainWindow.reload();
-			}
-		}
-	]
+      label: 'Forward',
+      click: () => {
+        mainWindow.webContents.goForward();
+      }
+    },
+    {
+      label: 'Refresh (F5)',
+      click: () => {
+        mainWindow.reload();
+      }
+    }
+  ]
 });
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -51,43 +51,29 @@ if (!gotTheLock) {
       if (!mainWindow.isVisible()) mainWindow.show()
       mainWindow.focus()
     }
-  })
+  });
 
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
   app.on('ready', () => {
     // Create the browser window.
-   mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
       center: true,
       show: false,
-      frame: false,
       maximizable: true,
+      title: "1Hack | Tutorials For Free, Guides, Articles & Community Forum - A place where everyone can share knowledge with each other",
       icon: path.join(__dirname, 'img/icon.png'),
       backgroundColor: '#2e2c29',
       webPreferences: {
         preload: path.join(__dirname, 'renderer.js')
       }
     });
+    mainWindow.setMenu(null);
 
-    tray = new Tray(path.join(__dirname, 'img/icon.png'));
-    tray.setIgnoreDoubleClickEvents(true)
-    tray.setContextMenu(Menu.buildFromTemplate([{
-        label: 'Show App',
-        click: function () {
-          mainWindow.show();
-        }
-      },
-      {
-        label: 'Quit',
-        click: function () {
-          isQuiting = true;
-          app.quit();
-        }
-      }
-    ]));
-
-    tray.setToolTip('1Hack - Together WE Learn');
+    mainWindow.on('page-title-updated', function (e) {
+      e.preventDefault()
+    });
 
     // and load the home page of the app.
     mainWindow.loadURL('https://onehack.us');
@@ -95,10 +81,13 @@ if (!gotTheLock) {
     //when ready maximize and show. This reduces flashing
 
     ipcMain.on('app-loaded', () => {
-      mainWindow.maximize();
       mainWindow.show();
+      mainWindow.maximize();
     });
 
+    ipcMain.once('app-loaded', () => {
+      createTray();
+    });
     //Open all links with target=_blank in the default browser
 
     mainWindow.webContents.on('new-window', (e, url) => {
@@ -139,10 +128,37 @@ app.on('window-all-closed', () => {
   }
 });
 
+//Temporary fix for MacOS dock
+if (os.platform() === "darwin") {
+  app.dock.hide();
+}
+
 app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+  mainWindow.show();
+  mainWindow.focus();
 });
+
+function createTray() {
+  tray = new Tray(path.join(__dirname, 'img/icon.png'));
+  tray.setIgnoreDoubleClickEvents(true);
+  tray.setContextMenu(Menu.buildFromTemplate([{
+      label: 'Show App',
+      click: function () {
+        mainWindow.show();
+      }
+    },
+    {
+      label: 'Quit',
+      click: function () {
+        isQuiting = true;
+        app.quit();
+      }
+    }
+  ]));
+  tray.setToolTip('1Hack - Together WE Learn');
+}
