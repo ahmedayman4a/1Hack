@@ -3,14 +3,11 @@ const {
   BrowserWindow,
   ipcMain,
   Tray,
-  Menu,
-  nativeTheme
+  Menu
 } = require('electron');
 const path = require('path');
 const contextMenu = require('electron-context-menu');
 
-var os = require('os');
-nativeTheme.themeSource = "dark";
 contextMenu({
   prepend: (defaultActions, params, mainWindow) => [{
       label: 'Back',
@@ -66,7 +63,6 @@ if (!gotTheLock) {
       fullscreen: false,
       fullscreenable: false,
       maximizable: true,
-      darkTheme: true,
       title: "1Hack | Tutorials For Free, Guides, Articles & Community Forum - A place where everyone can share knowledge with each other",
       icon: path.join(__dirname, 'img/icon.png'),
       backgroundColor: '#2e2c29',
@@ -133,12 +129,6 @@ app.on('window-all-closed', () => {
   }
 });
 
-//Temporary fix for MacOS dock
-/*
-if (os.platform() === "darwin") {
-  app.dock.hide();
-}
-*/
 app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
