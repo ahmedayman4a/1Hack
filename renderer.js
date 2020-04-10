@@ -54,8 +54,8 @@ function handleWindowControls() {
         forwardLi.append(forwardDiv);
         var forwardImg = document.createElement("img");
         forwardImg.src = "https://gistcdn.githack.com/ahmedayman4a/dc96efbee546ad1579d9b80d3470cf04/raw/8aab981aa8505ca389eb3746e69c7598e25b8d7d/Forward.svg";
-        forwardImg.style.width = "2.2857em";
-        forwardImg.style.height = "2.2857em";
+        forwardImg.style.width = "2em";
+        forwardImg.style.height = "2em";
         forwardImg.id = "forward-button-img";
         forwardDiv.append(forwardImg);
         forwardImg.onmouseover = function () {
@@ -78,8 +78,8 @@ function handleWindowControls() {
         backLi.append(backDiv);
         var backImg = document.createElement("img");
         backImg.src = "https://gistcdn.githack.com/ahmedayman4a/07f4bdb4637d9545396d4985daed696d/raw/c224cb85ca13af933111f82a5540f61d2bc3c0e9/Back.svg";
-        backImg.style.width = "2.2857em";
-        backImg.style.height = "2.2857em";
+        backImg.style.width = "2em";
+        backImg.style.height = "2em";
         backImg.id = "back-button-img";
         backDiv.append(backImg);
         backImg.onmouseover = function () {
