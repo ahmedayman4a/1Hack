@@ -4,6 +4,7 @@
   "version": "1.1.0",
   "description": "Together WE Learn!",
   "main": "index.js",
+  "darwinDarkModeSupport" : "true",
   "repository": {
     "type": "git",
     "url": "https://github.com/ahmedayman4a/1Hack.git"
