@@ -3,11 +3,13 @@ const {
   BrowserWindow,
   ipcMain,
   Tray,
-  Menu
+  Menu,
+  nativeTheme
 } = require('electron');
 const path = require('path');
 const contextMenu = require('electron-context-menu');
 
+nativeTheme.themeSource = "light";
 contextMenu({
   prepend: (defaultActions, params, mainWindow) => [{
       label: 'Back',
