@@ -140,7 +140,7 @@ app.on('activate', () => {
 });
 
 function createTray() {
-  tray = new Tray(path.join(__dirname, 'img/icon.png'));
+  tray = new Tray(path.join(__dirname, 'img/icon2.png'));
   tray.setIgnoreDoubleClickEvents(true);
   tray.setContextMenu(Menu.buildFromTemplate([{
       label: 'Show App',
