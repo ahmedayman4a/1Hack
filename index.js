@@ -74,8 +74,12 @@ if (!gotTheLock) {
     });
     mainWindow.setMenu(null);
 
-    mainWindow.on('page-title-updated', function (e) {
-      e.preventDefault()
+    mainWindow.on('page-title-updated', function (e,title) {
+      if(title.startsWith("OneHack.Us"))
+      {
+        mainWindow.setTitle("1Hack | Tutorials For Free, Guides, Articles & Community Forum - A place where everyone can share knowledge with each other");
+        e.preventDefault();
+      }
     });
 
     // and load the home page of the app.
