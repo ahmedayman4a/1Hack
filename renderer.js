@@ -10,6 +10,7 @@ document.onreadystatechange = (event) => {
         handleWindowControls();
         bindShortcuts();
        ipcRenderer.send('app-loaded',"Im ready");
+       
     }
 };
 
@@ -26,32 +27,29 @@ function bindShortcuts(){
     })
 }
 function handleWindowControls() {
-    
-    var oldBackDiv = document.getElementById("back-button");
-    var oldForwardDiv = document.getElementById("forward-button");
-    if (!oldBackDiv || !oldForwardDiv){
+    var controlsContainer = document.getElementById("controls-container");
+    if (!controlsContainer){
         var wrapper = document.querySelector("header .wrap");
-        wrapper.setAttribute("style","margin: 0;width: 100%; max-width: unset;")
-        var ulELement = wrapper.querySelector(".contents ul.icons");
-        if(!oldBackDiv){
-            //Creates li inside it back div inside it back image
-            var backLi = createBackButton();
-            ulELement.append(backLi);
-        }
-
-        if(!oldForwardDiv){
-            var forwardLi = createForwardButton();
-            ulELement.append(forwardLi);
-        }
+        wrapper.setAttribute("style","max-width: unset; margin: 0;width: 100%;");
+        controlsContainer = createControlsContainer();
     }
     
+    function createControlsContainer(){
+        var header = document.querySelector("header .wrap .contents.clearfix");
+        var container = document.createElement("div");
+        container.id = "controls-container";
+        container.setAttribute("style", "margin-right: 8px; display: flex; justify-content: center;");
+        container.append(createBackButton());
+        container.append(createForwardButton());
+        header.prepend(container);
+        return container;
+    }
 
     function createForwardButton() {
-        var forwardLi = document.createElement("li");
         var forwardDiv = document.createElement("div");
         forwardDiv.id = "forward-button";
-        forwardDiv.setAttribute("style", "margin-right:10px; grid-column: 1;grid-row: 1 / span 1;display: flex;justify-content: center;align-items: center;width: 2.2857em;height: 2.2857em;padding: .2143em;");
-        forwardLi.append(forwardDiv);
+        forwardDiv.setAttribute("style", "display: flex;justify-content: center;align-items: center;width: 2.2857em;height: 2.2857em;padding: .2143em;");
+        
         var forwardImg = document.createElement("img");
         forwardImg.src = "https://gistcdn.githack.com/ahmedayman4a/dc96efbee546ad1579d9b80d3470cf04/raw/8aab981aa8505ca389eb3746e69c7598e25b8d7d/Forward.svg";
         forwardImg.style.width = "2em";
@@ -67,15 +65,14 @@ function handleWindowControls() {
         forwardImg.addEventListener("click", event => {
             win.webContents.goForward();
         });
-        return forwardLi;
+        return forwardDiv;
     }
 
     function createBackButton() {
-        var backLi = document.createElement("li");
         var backDiv = document.createElement("div");
         backDiv.id = "back-button";
-        backDiv.setAttribute("style", "grid-column: 2;grid-row: 1 / span 1;display: flex;justify-content: center;align-items: center; width: 2.2857em;height: 2.2857em;padding: .2143em;");
-        backLi.append(backDiv);
+        backDiv.setAttribute("style", "display: flex;justify-content: center;align-items: center; width: 2.2857em;height: 2.2857em;padding: .2143em;");
+        
         var backImg = document.createElement("img");
         backImg.src = "https://gistcdn.githack.com/ahmedayman4a/07f4bdb4637d9545396d4985daed696d/raw/c224cb85ca13af933111f82a5540f61d2bc3c0e9/Back.svg";
         backImg.style.width = "2em";
@@ -91,6 +88,6 @@ function handleWindowControls() {
         backImg.addEventListener("click", event => {
             win.webContents.goBack();
         });
-        return backLi;
+        return backDiv;
     }
 }
