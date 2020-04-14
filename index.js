@@ -69,6 +69,7 @@ if (!gotTheLock) {
       icon: path.join(__dirname, 'img/icon.png'),
       backgroundColor: '#2e2c29',
       webPreferences: {
+        enableBlinkFeatures: 'BackForwardCache',
         preload: path.join(__dirname, 'renderer.js')
       }
     });
