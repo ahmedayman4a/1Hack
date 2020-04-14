@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "electron-context-menu": "^0.16.0",
+    "electron-extensions": "^6.0.4",
     "electron-is-dev": "^1.1.0",
     "electron-squirrel-startup": "^1.0.0",
     "mousetrap": "^1.6.5"

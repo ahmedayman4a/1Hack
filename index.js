@@ -8,8 +8,13 @@ const {
 } = require('electron');
 const path = require('path');
 const contextMenu = require('electron-context-menu');
-
-nativeTheme.themeSource = "light";
+var ElectronExtensions = require('electron-extensions/main');
+const extensions = new ElectronExtensions.ExtensibleSession();
+(async () => {
+  await app.whenReady();
+  extensions.loadExtension('~/1Hack/eimadpbcbfnmbkopoojfekhnkhdbieeh'); // Path to the extension to load
+})();
+nativeTheme.themeSource = "system";
 contextMenu({
   prepend: (defaultActions, params, mainWindow) => [{
       label: 'Back',
