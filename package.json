@@ -29,6 +29,7 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
+    "darkreader": "^4.9.2",
     "electron-context-menu": "^0.16.0",
     "electron-extensions": "^6.0.4",
     "electron-is-dev": "^1.1.0",

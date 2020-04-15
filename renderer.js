@@ -1,40 +1,51 @@
 const remote = require('electron').remote;
-const { ipcRenderer } = require('electron');
+const {
+    ipcRenderer
+} = require('electron');
 var Mousetrap = require('mousetrap');
-
+const DarkReader = require('darkreader');
 const win = remote.getCurrentWindow();
 
 // When document has loaded, initialise
 document.onreadystatechange = (event) => {
     if (document.readyState == "complete") {
+        DarkReader.enable({
+            brightness: 100,
+            contrast: 90,
+            sepia: 10
+        }, {
+            url: ["onehack.us"],
+            invert: ["header .title a img","#back-button img","#forward-button img"]
+        });
         handleWindowControls();
         bindShortcuts();
-       ipcRenderer.send('app-loaded',"Im ready");
-       
+        ipcRenderer.send('app-loaded', "Im ready");
+
     }
 };
 
-window.onscroll = function() {
+window.onscroll = function () {
     handleWindowControls();
 };
 
 
-function bindShortcuts(){
+function bindShortcuts() {
     Mousetrap.bind(['command+r', 'ctrl+r', 'f5'], () => {
         win.reload();
-    
+
         return false // prevents default behavior and stops event from bubbling
     })
 }
+
 function handleWindowControls() {
     var controlsContainer = document.getElementById("controls-container");
-    if (!controlsContainer){
+    if (!controlsContainer) {
         var wrapper = document.querySelector("header .wrap");
-        wrapper.setAttribute("style","max-width: unset; margin: 0;width: 100%;");
+        wrapper.setAttribute("style", "max-width: unset; margin: 0;width: 100%;");
         controlsContainer = createControlsContainer();
     }
-    
-    function createControlsContainer(){
+
+    function createControlsContainer() {
         var header = document.querySelector("header .wrap .contents.clearfix");
         var container = document.createElement("div");
         container.id = "controls-container";
@@ -49,7 +60,7 @@ function handleWindowControls() {
         var forwardDiv = document.createElement("div");
         forwardDiv.id = "forward-button";
         forwardDiv.setAttribute("style", "display: flex;justify-content: center;align-items: center;width: 2.2857em;height: 2.2857em;padding: .2143em;");
-        
+
         var forwardImg = document.createElement("img");
         forwardImg.src = "https://gistcdn.githack.com/ahmedayman4a/dc96efbee546ad1579d9b80d3470cf04/raw/8aab981aa8505ca389eb3746e69c7598e25b8d7d/Forward.svg";
         forwardImg.style.width = "2em";
@@ -72,7 +83,7 @@ function handleWindowControls() {
         var backDiv = document.createElement("div");
         backDiv.id = "back-button";
         backDiv.setAttribute("style", "display: flex;justify-content: center;align-items: center; width: 2.2857em;height: 2.2857em;padding: .2143em;");
-        
+
         var backImg = document.createElement("img");
         backImg.src = "https://gistcdn.githack.com/ahmedayman4a/07f4bdb4637d9545396d4985daed696d/raw/c224cb85ca13af933111f82a5540f61d2bc3c0e9/Back.svg";
         backImg.style.width = "2em";
