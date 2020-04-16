@@ -34,6 +34,7 @@
     "electron-extensions": "^6.0.4",
     "electron-is-dev": "^1.1.0",
     "electron-squirrel-startup": "^1.0.0",
+    "electron-store": "^5.1.1",
     "mousetrap": "^1.6.5"
   },
   "devDependencies": {

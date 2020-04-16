@@ -8,8 +8,10 @@ const {
 } = require('electron');
 const path = require('path');
 const contextMenu = require('electron-context-menu');
+const Store = require('electron-store');
+const store = new Store();
 
-nativeTheme.themeSource = "light";
+nativeTheme.themeSource = "system";
 contextMenu({
   prepend: (defaultActions, params, mainWindow) => [{
       label: 'Back',
@@ -28,10 +30,23 @@ contextMenu({
       click: () => {
         mainWindow.reload();
       }
+    },
+    {
+      label: 'Enable Dark Mode',
+      visible: !nativeTheme.shouldUseDarkColors,
+      click: () => {
+        setDarkTheme();
+      }
+    },
+    {
+      label: 'Disable Dark Mode',
+      visible: nativeTheme.shouldUseDarkColors,
+      click: () => {
+        setLightTheme();
+      }
     }
   ]
 });
-
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
@@ -74,10 +89,8 @@ if (!gotTheLock) {
       }
     });
     mainWindow.setMenu(null);
-
-    mainWindow.on('page-title-updated', function (e,title) {
-      if(title.startsWith("OneHack.Us"))
-      {
+    mainWindow.on('page-title-updated', function (e, title) {
+      if (title.startsWith("OneHack.Us")) {
         mainWindow.setTitle("1Hack | Tutorials For Free, Guides, Articles & Community Forum - A place where everyone can share knowledge with each other");
         e.preventDefault();
       }
@@ -89,8 +102,24 @@ if (!gotTheLock) {
     //when ready maximize and show. This reduces flashing
 
     ipcMain.on('app-loaded', () => {
+      if(store.has("theme")){
+        if(store.get("theme") == "dark"){
+          setDarkTheme();
+        }else if(store.get("theme") == "light"){
+          setLightTheme();
+        }
+      }else{
+        if (nativeTheme.shouldUseDarkColors) {
+          setDarkTheme();
+        } else {
+          setLightTheme();
+        }
+      }
+      
+
       mainWindow.show();
       mainWindow.maximize();
+      
     });
 
     ipcMain.once('app-loaded', () => {
@@ -145,6 +174,22 @@ app.on('activate', () => {
   mainWindow.show();
   mainWindow.focus();
 });
+
+function setLightTheme() {
+  store.set("theme", "light");
+  mainWindow.webContents.send('set-theme', "light");
+  ipcMain.once('finished-set-theme',()=>{
+    nativeTheme.themeSource = "light";
+  });
+}
+
+function setDarkTheme() {
+  store.set("theme", "dark");
+  mainWindow.webContents.send('set-theme', "dark");
+  ipcMain.once('finished-set-theme',()=>{
+    nativeTheme.themeSource = "dark";
+  });
+}
 
 function createTray() {
   tray = new Tray(path.join(__dirname, 'img/icon2.png'));
