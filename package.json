@@ -1,8 +1,10 @@
 {
   "name": "1hack",
-  "version": "1.0.1",
+  "productName": "1Hack",
+  "version": "1.1.0",
   "description": "Together WE Learn!",
   "main": "index.js",
+  "darwinDarkModeSupport": "true",
   "repository": {
     "type": "git",
     "url": "https://github.com/ahmedayman4a/1Hack.git"
@@ -27,9 +29,12 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
+    "darkreader": "^4.9.2",
     "electron-context-menu": "^0.16.0",
+    "electron-extensions": "^6.0.4",
     "electron-is-dev": "^1.1.0",
     "electron-squirrel-startup": "^1.0.0",
+    "electron-store": "^5.1.1",
     "mousetrap": "^1.6.5"
   },
   "devDependencies": {
